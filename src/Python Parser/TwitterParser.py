@@ -1,7 +1,10 @@
-from bs4 import BeautifulSoup
-import sys
+from twython import Twython
 import time
-import requests
+
+APP_KEY = '8tLZ3KImFbikHPHYohJIDez1C'
+APP_SECRET = '1cYBFd7pFPV161hDPLDS7xXCnFmCpPmlPXcxovMKFTly9YWieI'
+
+twitter = Twython(APP_KEY, APP_SECRET)
 
 #Initialization of variables
 start = time.time()
@@ -12,7 +15,7 @@ url = "https://twitter.com/BarackObama"
 file = open("tweets.txt", "w+")
 
 #URL Requests
-sys.stdout.write("Parsing '{}'...\n".format(url))
+print("Parsing '{}'...\n".format(url))
 response = requests.get(url)
 
 soup = BeautifulSoup(response.content, "html.parser")
