@@ -19,6 +19,13 @@ interpret them accordingly.
 Inspired by the instructions and documentation of twython itself:
 https://github.com/ryanmcgrath/twython
 '''
+def remove_html_tags(data):
+    '''
+    Function found on:
+    http://love-python.blogspot.com/2008/07/strip-html-tags-using-python.html
+    '''
+    p = re.compile(r'<.*?>')
+    return p.sub('', data)
 
 #Initialization of variables
 start = time.time()
@@ -28,20 +35,21 @@ APP_SECRET = '1cYBFd7pFPV161hDPLDS7xXCnFmCpPmlPXcxovMKFTly9YWieI'
 OAUTH_TOKEN = '4861151506-7ZtKF6s8Ve2mO9bswUIGxNh5OHL4LqvTEkQ3USw'
 OAUTH_TOKEN_SECRET = '4EbmpgVJ2C3tgB99wkkVMAL7eMwF9IfKtP2TWNorOeecy'
 twitter = Twython(APP_KEY, APP_SECRET)
-p = re.compile(r"(.*?)<.*?>(.*?)<.*?>")
 
 file = open("tweets.txt", "w+")
 
 #Requests to API to get tweets from a specific user
 print("Parsing '{}'...\n".format("https://twitter.com/BarackObama"))
 user_tweets = twitter.get_user_timeline(screen_name='BarackObama',
-                                        include_rts=False)
+                                        count = 200, include_rts=False)
 #Iteration through dictionary to write it to a file
 for tweet in user_tweets:
-    temp = re.search(p, tweet['text'])
     tweet['text'] = Twython.html_for_tweet(tweet)
-    print (tweet['text'] + "\n")
-    file.write(json.dumps(tweet['text'], indent = 4))
+    out = tweet['text'] + "\n"
+    print (remove_html_tags(out))
+    #file.write(json.dumps(tweet['text'], indent = 4) + '\n\n')
+    outfile = str(remove_html_tags(out).encode('ascii', 'ignore')) + '\n'
+    file.write(outfile[2:])
 
 
         
@@ -49,3 +57,6 @@ for tweet in user_tweets:
 file.close()
 end = time.time()
 print ("Finished processing in {} seconds".format(str(end - start)))
+
+
+
