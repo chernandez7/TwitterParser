@@ -7,7 +7,7 @@ AHK script to regularly schedule the parser to run/update tweets.
 
 TODO:
 Make c# app read from that text file.
-Make AHK script to schedule parser once it's finished.
+Make AHK script to schedule parser once it's finished. (Works but doesn't get all the tweets!)
 Create unit tests.
 Convert programs to runnable exe's.
 

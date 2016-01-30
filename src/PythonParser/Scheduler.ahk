@@ -13,7 +13,7 @@ SetTimer, Scheduler, 0
 return
 
 Scheduler:
-	Run python TwitterParser.py
+	Run python TwitterParser.py "BarackObama"
 	sleep 3600000 ;1 hour
 
 return

@@ -1,5 +1,6 @@
 from twython import Twython
 import time
+import sys
 import json
 import re
 
@@ -27,7 +28,20 @@ def remove_html_tags(data):
     return p.sub('', data)
 
 #Initialization of variables
+total = len(sys.argv)
+#print(sys.argv)
 start = time.time()
+
+if total == 2:
+    User_Name = sys.argv[1]
+elif total >= 2:
+    print ("Only the twitter username is needed as a parameter")
+    print ("Too many parameters given. Program Closing.")
+    exit()
+else:
+    print ("Not enough parameters. Program Closing.")
+    exit()
+url = "https://twitter.com/{}".format(User_Name)
 #Twitter API Variables needed for authentication
 APP_KEY = '8tLZ3KImFbikHPHYohJIDez1C'
 APP_SECRET = '1cYBFd7pFPV161hDPLDS7xXCnFmCpPmlPXcxovMKFTly9YWieI'
@@ -38,14 +52,14 @@ twitter = Twython(APP_KEY, APP_SECRET)
 file = open("tweets.txt", "w+")
 
 #Requests to API to get tweets from a specific user
-print("Parsing '{}'...\n".format("https://twitter.com/BarackObama"))
-user_tweets = twitter.get_user_timeline(screen_name='BarackObama',
+print("Parsing '{}'...\n".format(url))
+user_tweets = twitter.get_user_timeline(screen_name=User_Name,
                                         count = 500, include_rts=False)
 #Iteration through dictionary to write it to a file
 for tweet in user_tweets:
     tweet['text'] = Twython.html_for_tweet(tweet)
     out = tweet['text'] + "\n"
-    print (remove_html_tags(out))
+    #print (remove_html_tags(out))
     outfile = str(remove_html_tags(out).encode('ascii', 'ignore')) + '\n'
     file.write(outfile[2:])
 
