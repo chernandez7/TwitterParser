@@ -23,33 +23,32 @@ namespace ParsingEngine
             _tweet = ProcessTweet(_rawTweet);
         }
 
-        //Need to figure out way to get exact strings and make regex's
         //Help creating the regex string from: https://regex101.com/
         private Dictionary<string, string> ProcessTweet(string tweet)
         {
             var dict = new Dictionary<string, string>();
             //mentions @
             var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
-            var mentionmatch = mentionRegex.Match(tweet);
-            if (mentionmatch.Success)
+            var mentionMatch = mentionRegex.Match(tweet);
+            for (var i = 0; i <mentionMatch.Groups.Count; i++)
             {
-                dict.Add("mention", mentionmatch.Value);
-                _mentionList.Add(mentionmatch.Value);
+                dict.Add("mention", mentionMatch.Groups[i].ToString());
+                _mentionList.Add(mentionMatch.Value);
             }
             //Links
             var linkRegex = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?");
             var linkMatch = linkRegex.Match(tweet);
-            if (linkMatch.Success)
+            for (var i = 0; i < linkMatch.Groups.Count; i++)
             {
-                dict.Add("link", linkMatch.Value);
+                dict.Add("link", linkMatch.Groups[i].ToString());
                 _mentionList.Add(linkMatch.Value);
             }
             //topics #
             var topicRegex = new Regex("(#)((?:[A-Za-z0-9-_]*))");
             var topicMatch = topicRegex.Match(tweet);
-            if (topicMatch.Success)
+            for (var i = 0; i < topicMatch.Groups.Count; i++)
             {
-                dict.Add("topic", topicMatch.Value);
+                dict.Add("topic", topicMatch.Groups[i].ToString());
                 _mentionList.Add(topicMatch.Value);
             }
             return dict;
@@ -78,13 +77,10 @@ namespace ParsingEngine
 
         public void PrintTweet()
         {
-            foreach (var key in _tweet.Keys)
+            foreach (KeyValuePair<string, string> kvp in _tweet)
             {
-                foreach (var v in _tweet[key])
-                {
-                    Console.Write("{0}, ", v);
-                }
-                Console.WriteLine();
+                Console.WriteLine("{0}\t{1}",
+                    kvp.Key, kvp.Value);
             }
         }
     };

@@ -13,15 +13,14 @@ namespace ParsingEngine
     {
         public static int  Main(string[] args)
         {
-            var testTweet = new Tweet("@franky goes to #hollywood #cali #test. See http://cnn.com.");
+            var testTweet = new Tweet("@franky goes to #hollywood #cali #test. See http://cnn.com. @frunky");
 
             Console.WriteLine(testTweet.GetrawTweet());
             PrintList(testTweet.GetMentions());
-            PrintList(testTweet.GetTopics());
             PrintList(testTweet.GetLink());
-            Console.ReadLine();
-            //testTweet.PrintTweet();
+            PrintList(testTweet.GetTopics());
 
+            testTweet.PrintTweet();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
 
@@ -32,9 +31,8 @@ namespace ParsingEngine
         {
             for (int i = 0; i < list.Count(); i++)
             {
-                Console.Write(list[i] + " ");
+                Console.WriteLine(list[i] + " ");
             }
-            Console.ReadLine();
         }
     }
 }
