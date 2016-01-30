@@ -13,7 +13,7 @@ namespace ParsingEngine
     {
         public static int  Main(string[] args)
         {
-            var testTweet = new Tweet("@Person1 Hey, how is the #weather");
+            var testTweet = new Tweet("@franky goes to #hollywood. See http://cnn.com.");
 
             Console.WriteLine(testTweet.getrawTweet());
             Console.WriteLine("Press any key to exit...");
