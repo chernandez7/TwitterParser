@@ -2,6 +2,7 @@ from twython import Twython
 from twython import TwythonStreamer
 import time
 import json
+import re
 
 '''
 The Basis of this script started out as a modification
@@ -27,6 +28,7 @@ APP_SECRET = '1cYBFd7pFPV161hDPLDS7xXCnFmCpPmlPXcxovMKFTly9YWieI'
 OAUTH_TOKEN = '4861151506-7ZtKF6s8Ve2mO9bswUIGxNh5OHL4LqvTEkQ3USw'
 OAUTH_TOKEN_SECRET = '4EbmpgVJ2C3tgB99wkkVMAL7eMwF9IfKtP2TWNorOeecy'
 twitter = Twython(APP_KEY, APP_SECRET)
+p = re.compile(r"(.*?)<.*?>(.*?)<.*?>")
 
 file = open("tweets.txt", "w+")
 
@@ -36,8 +38,11 @@ user_tweets = twitter.get_user_timeline(screen_name='BarackObama',
                                         include_rts=False)
 #Iteration through dictionary to write it to a file
 for tweet in user_tweets:
+    temp = re.search(p, tweet['text'])
     tweet['text'] = Twython.html_for_tweet(tweet)
-    file.write(json.dumps(tweet, indent = 4))
+    print (tweet['text'] + "\n")
+    file.write(json.dumps(tweet['text'], indent = 4))
+
 
         
 #Cleanup
