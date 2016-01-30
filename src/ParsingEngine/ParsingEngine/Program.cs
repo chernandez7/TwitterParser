@@ -13,17 +13,28 @@ namespace ParsingEngine
     {
         public static int  Main(string[] args)
         {
-            var testTweet = new Tweet("@franky goes to #hollywood. See http://cnn.com.");
+            var testTweet = new Tweet("@franky goes to #hollywood #cali #test. See http://cnn.com.");
 
             Console.WriteLine(testTweet.GetrawTweet());
-            Console.WriteLine(testTweet.GetMentions());
-            Console.WriteLine(testTweet.GetTopics());
-            Console.WriteLine(testTweet.GetUrl());
+            PrintList(testTweet.GetMentions());
+            PrintList(testTweet.GetTopics());
+            PrintList(testTweet.GetLink());
+            Console.ReadLine();
+            //testTweet.PrintTweet();
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
 
             return 0;
+        }
+
+        private static void PrintList(List<string> list)
+        {
+            for (int i = 0; i < list.Count(); i++)
+            {
+                Console.Write(list[i] + " ");
+            }
+            Console.ReadLine();
         }
     }
 }
