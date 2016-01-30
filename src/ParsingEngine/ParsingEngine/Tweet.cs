@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Runtime.Remoting.Metadata;
 using System.Text.RegularExpressions;
 
 namespace ParsingEngine
 {
     class Tweet
     {
-        readonly string _rawTweet;
-        private readonly Dictionary<string, List<string>> _tweet;
+        readonly string _rawTweet; //Tweet inputted as text
+        private readonly Dictionary<string, List<string>> _tweet; //Compartmentalized version of tweet
 
         public Tweet(string tweet)
         {
@@ -17,7 +15,10 @@ namespace ParsingEngine
             _tweet = ProcessTweet(_rawTweet);
         }
 
-        //Help creating the regex string from: https://regex101.com/
+        //Help creating the regex strings from:
+        //https://regex101.com/
+        //http://jes.al/2009/05/how-to-parse-twitter-usernames-hashtags-and-urls-in-c-30/
+        //http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
         private Dictionary<string, List<string>> ProcessTweet(string tweet)
         {
             var dict = new Dictionary<string, List<string>>();
@@ -32,6 +33,7 @@ namespace ParsingEngine
             return dict;
         }
 
+        //Finds all "#" and everything after it until a whitespace occurs.
         private static List<string> ProcessTopics(string tweet)
         {
             //topics #
@@ -44,6 +46,7 @@ namespace ParsingEngine
             return tempList;
         }
 
+        //Finds all "http://" "https://" until a "." then finds whitespace 
         private static List<string> ProcessLinks(string tweet)
         {
             //Links
@@ -56,6 +59,7 @@ namespace ParsingEngine
             return tempList;
         }
 
+        //Finds all "@" until a whitespace
         private static List<string> ProcessMentions(string tweet)
         {
             //mentions @
@@ -68,36 +72,29 @@ namespace ParsingEngine
             return tempList;
         }
 
-        public string GetrawTweet()
-        {
-            return _rawTweet;
-        }
+        public string GetrawTweet() { return _rawTweet; }
 
-        public List<string> GetMentions()
-        {
-            return _tweet["Mentions"];
-        }
+        public List<string> GetMentions() { return _tweet["Mentions"]; }
 
-        public List<string> GetTopics()
-        {
-            return _tweet["Topics"];
-        }
+        public List<string> GetTopics() { return _tweet["Topics"]; }
 
-        public List<string> GetLink()
-        {
-            return _tweet["Links"];
-        }
+        public List<string> GetLink() { return _tweet["Links"]; }
 
+        //Essencially a ToString() for Tweets
         public void PrintTweet()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(_rawTweet);
             Console.WriteLine();
             foreach (var key in _tweet.Keys)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("{0}: ", key);
                 foreach (var value in _tweet[key])
                 {
+                    Console.ResetColor();
                     Console.Write(" {0}", value);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                 }
                 Console.WriteLine();
             }
