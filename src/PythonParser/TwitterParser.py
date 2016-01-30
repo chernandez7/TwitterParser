@@ -1,5 +1,4 @@
 from twython import Twython
-from twython import TwythonStreamer
 import time
 import json
 import re
@@ -41,13 +40,12 @@ file = open("tweets.txt", "w+")
 #Requests to API to get tweets from a specific user
 print("Parsing '{}'...\n".format("https://twitter.com/BarackObama"))
 user_tweets = twitter.get_user_timeline(screen_name='BarackObama',
-                                        count = 200, include_rts=False)
+                                        count = 500, include_rts=False)
 #Iteration through dictionary to write it to a file
 for tweet in user_tweets:
     tweet['text'] = Twython.html_for_tweet(tweet)
     out = tweet['text'] + "\n"
     print (remove_html_tags(out))
-    #file.write(json.dumps(tweet['text'], indent = 4) + '\n\n')
     outfile = str(remove_html_tags(out).encode('ascii', 'ignore')) + '\n'
     file.write(outfile[2:])
 
