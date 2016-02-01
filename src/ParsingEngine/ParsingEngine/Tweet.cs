@@ -6,7 +6,7 @@ namespace ParsingEngine
 {
     class Tweet
     {
-        readonly string _rawTweet; //Tweet inputted as text
+        private readonly string _rawTweet; //Tweet inputted as text
         private readonly Dictionary<string, List<string>> _tweet; //Compartmentalized version of tweet
 
         public Tweet(string tweet)
