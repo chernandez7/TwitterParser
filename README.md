@@ -18,6 +18,6 @@ This should give all the tweets from the parser and label their mentions, topics
 
 TODO:
 C# Application isn't 100% bug free in interpreting tweets yet.
-Create unit tests.
+Add Regex testing to unit tests.
 
 -Christopher Hernandez
