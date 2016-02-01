@@ -74,7 +74,7 @@ namespace ParsingEngine
 
         public string GetRawTweet() { return _rawTweet; }
 
-        public string GetTweet() { return _tweet; }
+        public Dictionary<string, List<string>> GetTweet() { return _tweet; }
 
         public List<string> GetMentions() { return _tweet["Mentions"]; }
 
