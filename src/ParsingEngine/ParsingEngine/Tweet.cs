@@ -19,7 +19,7 @@ namespace ParsingEngine
         //https://regex101.com/
         //http://jes.al/2009/05/how-to-parse-twitter-usernames-hashtags-and-urls-in-c-30/
         //http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
-        private Dictionary<string, List<string>> ProcessTweet(string tweet)
+        private static Dictionary<string, List<string>> ProcessTweet(string tweet)
         {
             var dict = new Dictionary<string, List<string>>();
             var mentionList = ProcessMentions(tweet);

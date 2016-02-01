@@ -4,7 +4,7 @@ using System.IO;
 
 namespace ParsingEngine
 {
-    class Program
+    public class ParsingEngine
     {
         public static int  Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace ParsingEngine
             return 0;
         }
 
-        private static List<Tweet> GetTweets()
+        public static List<Tweet> GetTweets()
         {
             var list = new List<Tweet>();
             string line;
