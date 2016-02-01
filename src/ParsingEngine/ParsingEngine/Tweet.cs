@@ -72,7 +72,9 @@ namespace ParsingEngine
             return tempList;
         }
 
-        public string GetrawTweet() { return _rawTweet; }
+        public string GetRawTweet() { return _rawTweet; }
+
+        public string GetTweet() { return _tweet; }
 
         public List<string> GetMentions() { return _tweet["Mentions"]; }
 
