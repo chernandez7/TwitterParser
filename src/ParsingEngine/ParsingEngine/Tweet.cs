@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace ParsingEngine
 {
-    class Tweet
+    public class Tweet
     {
         private readonly string _rawTweet; //Tweet inputted as text
         private readonly Dictionary<string, List<string>> _tweet; //Compartmentalized version of tweet
@@ -80,7 +80,7 @@ namespace ParsingEngine
 
         public List<string> GetTopics() { return _tweet["Topics"]; }
 
-        public List<string> GetLink() { return _tweet["Links"]; }
+        public List<string> GetLinks() { return _tweet["Links"]; }
 
         //Essencially a ToString() for Tweets
         public void PrintTweet()
