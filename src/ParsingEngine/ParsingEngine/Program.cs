@@ -22,6 +22,7 @@ namespace ParsingEngine
             return 0;
         }
 
+        //Gets tweets from the text file that is written into from the python parsing script.
         public static List<Tweet> GetTweets()
         {
             var list = new List<Tweet>();
