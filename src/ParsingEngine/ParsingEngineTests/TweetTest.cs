@@ -74,6 +74,10 @@ namespace ParsingEngineTests
 
             Assert.IsTrue(testTweet.GetTopics().Contains("#test"));
             Assert.IsTrue(testTweet.GetTopics().Contains("#"));
+            Assert.IsFalse(testTweet.GetTopics().Contains("test"));
+            Assert.IsFalse(testTweet.GetTopics().Contains("##test"));
+            Assert.IsFalse(testTweet.GetTopics().Contains("#@test"));
+            Assert.IsFalse(testTweet.GetTopics().Contains("@#test"));
 
             //Testing (@)((?:[A-Za-z0-9-_]*))
             //Checking different tests like spaces and other markers interfering with the topic marker.
@@ -81,14 +85,22 @@ namespace ParsingEngineTests
 
             Assert.IsTrue(testTweet2.GetMentions().Contains("@test"));
             Assert.IsTrue(testTweet2.GetMentions().Contains("@"));
+            Assert.IsFalse(testTweet2.GetMentions().Contains(" test"));
+            Assert.IsFalse(testTweet2.GetMentions().Contains("@@test"));
+            Assert.IsFalse(testTweet2.GetMentions().Contains("#@test"));
+            Assert.IsFalse(testTweet2.GetMentions().Contains("@#test"));
+            Assert.IsFalse(testTweet2.GetMentions().Contains("test"));
 
             //Testing (http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?
             //Checking different tests like spaces and other markers interfering with the topic marker.
-            var testTweet3 = new Tweet("http:// https:// google.com website.net");
+            var testTweet3 = new Tweet("http:// https:// google.com https://google.com website.net http://website.net");
 
             Assert.IsTrue(testTweet3.GetLinks().Contains("google.com"));
+            Assert.IsTrue(testTweet3.GetLinks().Contains("https://google.com"));
+            Assert.IsTrue(testTweet3.GetLinks().Contains("http://website.net"));
             Assert.IsTrue(testTweet3.GetLinks().Contains("website.net"));
-
+            Assert.IsFalse(testTweet3.GetLinks().Contains("http://"));
+            Assert.IsFalse(testTweet3.GetLinks().Contains("https://"));
         }
     }
 }
