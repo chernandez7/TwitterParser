@@ -72,6 +72,7 @@ namespace ParsingEngine
             return tempList;
         }
 
+        //Accessor functions
         public string GetRawTweet() { return _rawTweet; }
 
         public Dictionary<string, List<string>> GetTweet() { return _tweet; }

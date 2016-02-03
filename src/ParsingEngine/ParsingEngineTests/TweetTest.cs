@@ -30,39 +30,49 @@ namespace ParsingEngineTests
         [TestMethod]
         public void TestGetMentions()
         {
+            var testTweet = new Tweet("@john @bob message");
             var testList = new List<string>(1) {"bob"};
             var testList2 = new List<string>(1) { "@john" };
 
             Assert.IsTrue(testList2[0] == _tweet.GetMentions()[0]);
-            Assert.IsFalse(testList2[0] != _tweet.GetMentions()[0]);
-            Assert.IsTrue(testList != _tweet.GetMentions());
             Assert.IsFalse(testList == _tweet.GetMentions());
+
+            Assert.IsTrue(testTweet.GetMentions().Contains("@john"));
+            Assert.IsTrue(testTweet.GetMentions().Contains("@bob"));
+            Assert.IsFalse(testTweet.GetMentions().Contains("@message"));
+
         }
 
         //Checks GetTopics() function to get the correct topics in a list.
         [TestMethod]
         public void TestGetTopics()
         {
+            var testTweet = new Tweet("#coffeeshop #supermarket message");
             var testList = new List<string>(1) { "coffee shop" };
             var testList2 = new List<string>(1) { "#supermarket" };
 
             Assert.IsTrue(testList != _tweet.GetTopics());
-            Assert.IsFalse(testList == _tweet.GetTopics());
             Assert.IsTrue(testList2[0] == _tweet.GetTopics()[0]);
-            Assert.IsFalse(testList2[0] != _tweet.GetTopics()[0]);
+
+            Assert.IsTrue(testTweet.GetTopics().Contains("#coffeeshop"));
+            Assert.IsTrue(testTweet.GetTopics().Contains("#supermarket"));
+            Assert.IsFalse(testTweet.GetTopics().Contains("#message"));
         }
 
         //Checks GetLinks() function to get the correct topics in a list.
         [TestMethod]
         public void TestGetLinks()
         {
+            var testTweet = new Tweet("http://yahoo.com http://google.com message");
             var testList = new List<string>(1) { "http://yahoo.com" };
             var testList2 = new List<string>(1) { "http://google.com" };
 
-            Assert.IsTrue(testList != _tweet.GetTopics());
             Assert.IsFalse(testList == _tweet.GetTopics());
             Assert.IsTrue(testList2[0] == _tweet.GetLinks()[0]);
-            Assert.IsFalse(testList2[0] != _tweet.GetLinks()[0]);
+
+            Assert.IsTrue(testTweet.GetLinks().Contains("http://yahoo.com"));
+            Assert.IsTrue(testTweet.GetLinks().Contains("http://google.com"));
+            Assert.IsFalse(testTweet.GetLinks().Contains("message"));
         }
 
         [TestMethod]
@@ -74,24 +84,26 @@ namespace ParsingEngineTests
 
             Assert.IsTrue(testTweet.GetTopics().Contains("#test"));
             Assert.IsTrue(testTweet.GetTopics().Contains("#"));
+
             Assert.IsFalse(testTweet.GetTopics().Contains("test"));
             Assert.IsFalse(testTweet.GetTopics().Contains("##test"));
             Assert.IsFalse(testTweet.GetTopics().Contains("#@test"));
             Assert.IsFalse(testTweet.GetTopics().Contains("@#test"));
 
-            //Testing (@)((?:[A-Za-z0-9-_]*))
+            //Testing "(@)((?:[A-Za-z0-9-_]*))"
             //Checking different tests like spaces and other markers interfering with the topic marker.
             var testTweet2 = new Tweet("@test @ test @@test #@test @#test");
 
             Assert.IsTrue(testTweet2.GetMentions().Contains("@test"));
             Assert.IsTrue(testTweet2.GetMentions().Contains("@"));
+
             Assert.IsFalse(testTweet2.GetMentions().Contains(" test"));
             Assert.IsFalse(testTweet2.GetMentions().Contains("@@test"));
             Assert.IsFalse(testTweet2.GetMentions().Contains("#@test"));
             Assert.IsFalse(testTweet2.GetMentions().Contains("@#test"));
             Assert.IsFalse(testTweet2.GetMentions().Contains("test"));
 
-            //Testing (http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?
+            //Testing "(http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?"
             //Checking different tests like spaces and other markers interfering with the topic marker.
             var testTweet3 = new Tweet("http:// https:// google.com https://google.com website.net http://website.net");
 
@@ -99,6 +111,7 @@ namespace ParsingEngineTests
             Assert.IsTrue(testTweet3.GetLinks().Contains("https://google.com"));
             Assert.IsTrue(testTweet3.GetLinks().Contains("http://website.net"));
             Assert.IsTrue(testTweet3.GetLinks().Contains("website.net"));
+
             Assert.IsFalse(testTweet3.GetLinks().Contains("http://"));
             Assert.IsFalse(testTweet3.GetLinks().Contains("https://"));
         }
