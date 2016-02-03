@@ -17,7 +17,6 @@ Either Open "ParsingEngine.sln" in an IDE or run the executable "tweet.exe".
 This should give all the tweets from the parser and label their mentions, topics, and links given.
 
 TODO:
-C# Application isn't 100% bug free in interpreting tweets yet.
-Add Regex testing to unit tests.
+
 
 -Christopher Hernandez
