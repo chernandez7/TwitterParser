@@ -70,28 +70,25 @@ namespace ParsingEngineTests
         {
             //Testing Topic regex string "(#)((?:[A-Za-z0-9-_]*))"
             //Checking different tests like spaces and other markers interfering with the topic marker.
-            var testTweet = new Tweet("#test # test ##test #@test @#test")
-            var list = new List<string>(6)
-            {
-                "test", "", "test", "@test", "test"
-            };
-            Assert.IsTrue(testTweet.GetTopics() == list);
+            var testTweet = new Tweet("#test # test ##test #@test @#test");
+
+            Assert.IsTrue(testTweet.GetTopics().Contains("#test"));
+            Assert.IsTrue(testTweet.GetTopics().Contains("#"));
 
             //Testing (@)((?:[A-Za-z0-9-_]*))
             //Checking different tests like spaces and other markers interfering with the topic marker.
             var testTweet2 = new Tweet("@test @ test @@test #@test @#test");
-            var list2 = new List<string>(6)
-            {
-                "test", "", "test", "@test", "test"
-            };
-            Assert.IsTrue(testTweet2.GetMentions() == list2);
 
-            var testTweet3 = new Tweet("http:// https:// google.com website.net")
-            var list3 = new List<string>(6)
-                {
-                    "http://", "https://", "google.com", "website.net"
-                };
-            Assert.IsTrue(testTweet3.GetLinks() == list3);
+            Assert.IsTrue(testTweet2.GetMentions().Contains("@test"));
+            Assert.IsTrue(testTweet2.GetMentions().Contains("@"));
+
+            //Testing (http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?
+            //Checking different tests like spaces and other markers interfering with the topic marker.
+            var testTweet3 = new Tweet("http:// https:// google.com website.net");
+
+            Assert.IsTrue(testTweet3.GetLinks().Contains("google.com"));
+            Assert.IsTrue(testTweet3.GetLinks().Contains("website.net"));
+
         }
     }
 }
