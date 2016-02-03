@@ -64,5 +64,34 @@ namespace ParsingEngineTests
             Assert.IsTrue(testList2[0] == _tweet.GetLinks()[0]);
             Assert.IsFalse(testList2[0] != _tweet.GetLinks()[0]);
         }
+
+        [TestMethod]
+        public void TestRegexStrings()
+        {
+            //Testing Topic regex string "(#)((?:[A-Za-z0-9-_]*))"
+            //Checking different tests like spaces and other markers interfering with the topic marker.
+            var testTweet = new Tweet("#test # test ##test #@test @#test")
+            var list = new List<string>(6)
+            {
+                "test", "", "test", "@test", "test"
+            };
+            Assert.IsTrue(testTweet.GetTopics() == list);
+
+            //Testing (@)((?:[A-Za-z0-9-_]*))
+            //Checking different tests like spaces and other markers interfering with the topic marker.
+            var testTweet2 = new Tweet("@test @ test @@test #@test @#test");
+            var list2 = new List<string>(6)
+            {
+                "test", "", "test", "@test", "test"
+            };
+            Assert.IsTrue(testTweet2.GetMentions() == list2);
+
+            var testTweet3 = new Tweet("http:// https:// google.com website.net")
+            var list3 = new List<string>(6)
+                {
+                    "http://", "https://", "google.com", "website.net"
+                };
+            Assert.IsTrue(testTweet3.GetLinks() == list3);
+        }
     }
 }
