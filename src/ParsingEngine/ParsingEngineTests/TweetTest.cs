@@ -41,6 +41,8 @@ namespace ParsingEngineTests
             Assert.IsTrue(testTweet.GetMentions().Contains("@bob"));
             Assert.IsFalse(testTweet.GetMentions().Contains("@message"));
 
+            Assert.IsTrue(testTweet.GetMentions().Count == 2);
+
         }
 
         //Checks GetTopics() function to get the correct topics in a list.
@@ -57,6 +59,8 @@ namespace ParsingEngineTests
             Assert.IsTrue(testTweet.GetTopics().Contains("#coffeeshop"));
             Assert.IsTrue(testTweet.GetTopics().Contains("#supermarket"));
             Assert.IsFalse(testTweet.GetTopics().Contains("#message"));
+
+            Assert.IsTrue(testTweet.GetTopics().Count == 2);
         }
 
         //Checks GetLinks() function to get the correct topics in a list.
@@ -73,6 +77,8 @@ namespace ParsingEngineTests
             Assert.IsTrue(testTweet.GetLinks().Contains("http://yahoo.com"));
             Assert.IsTrue(testTweet.GetLinks().Contains("http://google.com"));
             Assert.IsFalse(testTweet.GetLinks().Contains("message"));
+
+            Assert.IsTrue(testTweet.GetLinks().Count == 2);
         }
 
         [TestMethod]

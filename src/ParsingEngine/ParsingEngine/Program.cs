@@ -13,6 +13,7 @@ namespace ParsingEngine
             foreach (var tweet in tweetList)
             {
                 tweet.PrintTweet();
+
                 Console.WriteLine();
             }
 
