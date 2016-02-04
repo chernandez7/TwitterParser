@@ -8,11 +8,11 @@ namespace ParsingEngine
     {
         public static int  Main(string[] args)
         {
-            var tweetList = GetTweets();
+            var tweetList = GetTweets(); //Get Tweets from txt file
 
             foreach (var tweet in tweetList)
             {
-                tweet.PrintTweet();
+                tweet.PrintTweet(); //print tweets
 
                 Console.WriteLine();
             }

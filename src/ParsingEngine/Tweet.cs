@@ -46,7 +46,7 @@ namespace ParsingEngine
             return tempList;
         }
 
-        //Finds all "http://" "https://" until a "." then finds whitespace 
+        //Finds all "http://" "https://" until a "." then finds whitespace. if shortened then finds chars before and after "." between whitespace.
         private static List<string> ProcessLinks(string tweet)
         {
             //Links

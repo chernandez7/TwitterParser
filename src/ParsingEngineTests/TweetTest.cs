@@ -1,9 +1,6 @@
-﻿using System;
-using ParsingEngine;
+﻿using ParsingEngine;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ParsingEngine = ParsingEngine.ParsingEngine;
 
 namespace ParsingEngineTests
 {
@@ -11,8 +8,6 @@ namespace ParsingEngineTests
     public class TweetTest
     {
         private readonly Tweet _tweet = new Tweet("@john went to the #supermarket http://google.com");
-
-        //ADD: Process functions test regex strings used.
 
         //Checking for GetRawTweet() function to work properly and return the original string used to create the tweet. Should work even when using newly created tweets.
         [TestMethod]

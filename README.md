@@ -1,7 +1,5 @@
 # TwitterParser
 
-WIP
-
 Idea so far:
 Python Parsing script using Twitter API with Twython wrapper saves tweets in a text file.
 C# Application to properly sort tweets in data structures.
@@ -15,8 +13,6 @@ This would run and Parse Barack Obama's twitter page for the 200 most recent twe
 To Run the engine:
 Either Open "ParsingEngine.sln" in an IDE or run the executable "tweet.exe".
 This should give all the tweets from the parser and label their mentions, topics, and links given.
-
-TODO:
 
 
 -Christopher Hernandez
