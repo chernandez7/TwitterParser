@@ -2,9 +2,11 @@
 
 #Idea so far:
 
-Python Parsing script using Twitter API with Twython wrapper saves tweets in a text file.
+Python Parsing script using Twitter API with Twython wrapper saves tweets in a text file. Located in TwitterParser/src/ParsingEngine/bin/Debug/PythonParser/
+
 C# Application to properly sort tweets in data structures.
-AHK script to regularly schedule the parser to run/update tweets.
+C# Unit Tests to ensure that the above application is working.
+AutoHotKey script to run the parser to update tweets. (Also located with the python parser)
 
 #To update the tweets:
 
