@@ -8,9 +8,14 @@ namespace ParsingEngine
     {
         private readonly string _rawTweet; //Tweet inputted as text
         private readonly Dictionary<string, List<string>> _tweet; //Compartmentalized version of tweet
+        private readonly int _length;
 
         public Tweet(string tweet)
         {
+            //Redundant check if tweet is too long, but shouldn't because it's being parsed from twitter already.
+            if (_length > 140) {  throw new Exception("Tweet length can't be greater than 140 characters."); }
+            _length = tweet.Length;
+
             _rawTweet = tweet;
             _tweet = ProcessTweet(_rawTweet);
         }
@@ -75,6 +80,8 @@ namespace ParsingEngine
         //Accessor functions
         public string GetRawTweet() { return _rawTweet; }
 
+        public int GetLength() { return _length; }
+
         public Dictionary<string, List<string>> GetTweet() { return _tweet; }
 
         public List<string> GetMentions() { return _tweet["Mentions"]; }
@@ -89,6 +96,7 @@ namespace ParsingEngine
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(_rawTweet);
             Console.WriteLine();
+
             foreach (var key in _tweet.Keys)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -101,6 +109,11 @@ namespace ParsingEngine
                 }
                 Console.WriteLine();
             }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Length: ");
+            Console.ResetColor();
+            Console.WriteLine(_length);
+            Console.WriteLine();
         }
     }
 } ;

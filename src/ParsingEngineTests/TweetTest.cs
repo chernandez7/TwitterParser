@@ -17,6 +17,8 @@ namespace ParsingEngineTests
 
             Assert.IsTrue("@john went to the #supermarket http://google.com" == _tweet.GetRawTweet());
             Assert.IsFalse("@john did not go to the #supermarket http://google.com" == _tweet.GetRawTweet());
+            Assert.IsTrue(newTweet.GetLength() == 65);
+
             Assert.IsTrue("@child1 the #child did not go to the supermarket today google.com" == newTweet.GetRawTweet());
             Assert.IsFalse("@child1 the #child did not go to the recrd store today google.com" == _tweet.GetRawTweet());
         }
