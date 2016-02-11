@@ -69,7 +69,7 @@ namespace ParsingEngine
         {
             //mentions @
             var tempList = new List<string>();
-            var mentionRegex = new Regex("(\\S-@)((?:[A-Za-z0-9-_]*))");
+            var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
             foreach (Match match in mentionRegex.Matches(tweet))
             {
                 tempList.Add(match.ToString());
@@ -126,7 +126,11 @@ namespace ParsingEngine
             Console.Write("Length: ");
             Console.ResetColor();
             Console.WriteLine(_length);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Is Reply: ");
+            Console.ResetColor();
+            Console.WriteLine(IsReply() ? "Yes" : "No");
             Console.WriteLine();
         }
     }
-} ;
+};
