@@ -56,7 +56,7 @@ namespace ParsingEngine
         {
             //Links
             var tempList = new List<string>();
-            var linkRegex = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/\S\w[\w- ;,./?%&=]\S*)?");
+            var linkRegex = new Regex(@"(http(s)?://)?([\w-@]+\.)+[\w-\S]+(/\\/\S\w[\w- ;,./?%&=]@\S*)?");
             foreach (Match match in linkRegex.Matches(tweet))
             {
                 tempList.Add(match.ToString());
@@ -69,7 +69,8 @@ namespace ParsingEngine
         {
             //mentions @
             var tempList = new List<string>();
-            var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
+            //var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
+            var mentionRegex = new Regex("(\\S-@)((?:[A-Za-z0-9-_]*))");
             foreach (Match match in mentionRegex.Matches(tweet))
             {
                 tempList.Add(match.ToString());

@@ -21,7 +21,7 @@ namespace ParsingEngine
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Do you want mentions, topics, or links sorted? Or press 'x' to exit.");
+                Console.WriteLine("Do you want mentions, topics, or links sorted? Or type 'x' to exit.");
 
                 var sortType = Console.ReadLine();
 
