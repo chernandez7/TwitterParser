@@ -69,7 +69,6 @@ namespace ParsingEngine
         {
             //mentions @
             var tempList = new List<string>();
-            //var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
             var mentionRegex = new Regex("(\\S-@)((?:[A-Za-z0-9-_]*))");
             foreach (Match match in mentionRegex.Matches(tweet))
             {
@@ -91,12 +90,25 @@ namespace ParsingEngine
 
         public List<string> GetLinks() { return _tweet["Links"]; }
 
+        //Checks and returns a boolean if the tweet begins with a mention
+        public bool IsReply() { return _rawTweet[0] == '@'; }
+
         //Essencially a ToString() for Tweets
         public void PrintTweet()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(_rawTweet);
-            Console.WriteLine();
+            //Differentiates between tweet being a reply or not.
+            if (IsReply())
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(_rawTweet);
+                Console.WriteLine();
+            }
+            else //Is not a reply
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(_rawTweet);
+                Console.WriteLine();
+            }
 
             foreach (var key in _tweet.Keys)
             {

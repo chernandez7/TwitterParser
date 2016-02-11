@@ -24,7 +24,7 @@ def remove_html_tags(data):
     Function found on:
     http://love-python.blogspot.com/2008/07/strip-html-tags-using-python.html
     '''
-    p = re.compile(r'<.*?>')
+    p = re.compile(r"<.*?>")
     return p.sub('', data)
 
 #Initialization of variables
@@ -59,10 +59,9 @@ user_tweets = twitter.get_user_timeline(screen_name=User_Name,
 #Iteration through dictionary to write it to a file
 for tweet in user_tweets:
     tweet['text'] = Twython.html_for_tweet(tweet)
-    out = tweet['text'] + "\n"
-    #print (remove_html_tags(out))
-    outfile = str(remove_html_tags(out).encode('ascii', 'ignore')) + '\n'
-    file.write(outfile[2:])
+    out = tweet['text']
+    outfile = str(remove_html_tags(out).encode('ascii', 'ignore'))
+    file.write(outfile[2:-1] + "\n")
 
 
         
