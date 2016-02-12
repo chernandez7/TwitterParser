@@ -21,7 +21,7 @@ namespace ParsingEngine
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Do you want mentions, topics, or links sorted? Or type 'x' to exit.");
+                Console.WriteLine("Do you want 'mentions', 'topics', or 'links' sorted? Or type 'exit' to exit.");
 
                 var sortType = Console.ReadLine();
 
@@ -81,7 +81,7 @@ namespace ParsingEngine
             foreach (var entry in output)
             {
                 Console.ResetColor();
-                Console.Write("{0}: ", entry.word);
+                Console.Write("{0,-30}", entry.word);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0}", entry.frequency);
             }
@@ -118,7 +118,7 @@ namespace ParsingEngine
             foreach (var entry in output)
             {
                 Console.ResetColor();
-                Console.Write("{0}: ", entry.word);
+                Console.Write("{0,-30}", entry.word);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0}", entry.frequency);
             }
@@ -155,7 +155,7 @@ namespace ParsingEngine
             foreach (var entry in output)
             {
                 Console.ResetColor();
-                Console.Write("{0}: ", entry.word);
+                Console.Write("{0,-30}", entry.word);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0}", entry.frequency);
             }

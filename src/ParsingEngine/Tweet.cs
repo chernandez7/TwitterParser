@@ -56,7 +56,8 @@ namespace ParsingEngine
         {
             //Links
             var tempList = new List<string>();
-            var linkRegex = new Regex(@"(http(s)?://)?([\w-@]+\.)+[\w-\S]+(/\\/\S\w[\w- ;,./?%&=]@\S*)?");
+            //var linkRegex = new Regex(@"(http(s)?://)?([\w-@]+\.)+[\w-\S]+(/\\/\S\w[\w- ;,./?%&=]@\S*)?");
+            var linkRegex = new Regex(@"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$");
             foreach (Match match in linkRegex.Matches(tweet))
             {
                 tempList.Add(match.ToString());
@@ -113,7 +114,7 @@ namespace ParsingEngine
             foreach (var key in _tweet.Keys)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("{0}: ", key);
+                Console.Write("{0,-10} ", key);
                 foreach (var value in _tweet[key])
                 {
                     Console.ResetColor();
@@ -123,11 +124,11 @@ namespace ParsingEngine
                 Console.WriteLine();
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Length: ");
+            Console.Write("{0,-12}", "Length");
             Console.ResetColor();
             Console.WriteLine(_length);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Is Reply: ");
+            Console.Write("{0,-12}", "Is Reply");
             Console.ResetColor();
             Console.WriteLine(IsReply() ? "Yes" : "No");
             Console.WriteLine();

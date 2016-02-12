@@ -1,24 +1,17 @@
 # TwitterParser
 
-#Idea so far:
+#To Get or Update the Tweets from a User:
 
-Python Parsing script using Twitter API with Twython wrapper saves tweets in a text file. Located in TwitterParser/src/ParsingEngine/bin/Debug/PythonParser/
+-Navigate to `src\PythonParser`
+-Through the command line run TwitterParser.py. The parameter it will take will be the twitter username:
 
-C# Application to properly sort tweets in data structures.
-C# Unit Tests to ensure that the above application is working.
-AutoHotKey script to run the parser to update tweets. (Also located with the python parser)
+Ex. `$ python TwitterParser.py loyolachicago`
 
-#To update the tweets:
+This will run and Parse LoyolaChicago's twitter page for the 200 most recent tweets and store them in tweets.txt
 
-Run "TwitterParser.exe", it takes a parameter, the username of the twitter account.
-
-Ex. $ TwitterParser.exe BarackObama
-
-This would run and Parse Barack Obama's twitter page for the 200 most recent tweets and store them in tweets.txt.
-
-#To Run the engine:
-Either Open "ParsingEngine.sln" in an IDE or run the executable "tweet.exe".
-This should give all the tweets from the parser and label their mentions, topics, and links given.
-
+#To Run the Engine:
+-Open "ParsingEngine.sln" in an IDE.
+-This will give all the tweets from the parser and label their mentions, topics, and links given.
+-Then you have the option to sort the tweets and see the frequency of all the mentions, topics, and links used.
 
 -Christopher Hernandez
