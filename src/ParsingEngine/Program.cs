@@ -167,8 +167,7 @@ namespace ParsingEngine
         {
             var list = new List<Tweet>();
             string line;
-
-            var stream = new StreamReader(Path.Combine(Environment.CurrentDirectory, @"PythonParser\tweets.txt"));
+            var stream = new StreamReader("tweets.txt");
             while ((line = stream.ReadLine()) != null)
             {
                 var tempTweet = new Tweet(line);
