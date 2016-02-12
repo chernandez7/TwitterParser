@@ -13,9 +13,10 @@ namespace ParsingEngine
         public Tweet(string tweet)
         {
             //Redundant check if tweet is too long, but shouldn't because it's being parsed from twitter already.
-            if (_length > 140) {  throw new Exception("Tweet length can't be greater than 140 characters."); }
-            _length = tweet.Length;
+            if (_length > 140)
+                throw new Exception("Tweet length can't be greater than 140 characters.");
 
+            _length = tweet.Length;
             _rawTweet = tweet;
             _tweet = ProcessTweet(_rawTweet);
         }
@@ -23,7 +24,6 @@ namespace ParsingEngine
         //Help creating the regex strings from:
         //https://regex101.com/
         //http://jes.al/2009/05/how-to-parse-twitter-usernames-hashtags-and-urls-in-c-30/
-        //http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
         private static Dictionary<string, List<string>> ProcessTweet(string tweet)
         {
             var dict = new Dictionary<string, List<string>>();
@@ -44,10 +44,10 @@ namespace ParsingEngine
             //topics #
             var tempList = new List<string>();
             var topicRegex = new Regex("(#)((?:[A-Za-z0-9-_]*))");
+
             foreach (Match match in topicRegex.Matches(tweet))
-            {
                 tempList.Add(match.ToString());
-            }
+
             return tempList;
         }
 
@@ -56,12 +56,12 @@ namespace ParsingEngine
         {
             //Links
             var tempList = new List<string>();
-            //var linkRegex = new Regex(@"(http(s)?://)?([\w-@]+\.)+[\w-\S]+(/\\/\S\w[\w- ;,./?%&=]@\S*)?");
-            var linkRegex = new Regex(@"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$");
+            var linkRegex = new Regex(@"(http(s)?://)?([\w-@]+\.)+[\w-\S]+(/\\/\S\w[\w- ;,./?%&=]@\S*)?");
+            //var linkRegex = new Regex(@"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$");
+
             foreach (Match match in linkRegex.Matches(tweet))
-            {
                 tempList.Add(match.ToString());
-            }
+
             return tempList;
         }
 
@@ -71,10 +71,10 @@ namespace ParsingEngine
             //mentions @
             var tempList = new List<string>();
             var mentionRegex = new Regex("(@)((?:[A-Za-z0-9-_]*))");
+
             foreach (Match match in mentionRegex.Matches(tweet))
-            {
                 tempList.Add(match.ToString());
-            }
+
             return tempList;
         }
 

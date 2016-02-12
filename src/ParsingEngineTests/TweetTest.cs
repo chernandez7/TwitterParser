@@ -64,15 +64,15 @@ namespace ParsingEngineTests
         [TestMethod]
         public void TestGetLinks()
         {
-            var testTweet = new Tweet("http://yahoo.com http://google.com message");
+            var testTweet = new Tweet("yahoo.com google.com message");
             var testList = new List<string>(1) { "http://yahoo.com" };
             var testList2 = new List<string>(1) { "http://google.com" };
 
             Assert.IsFalse(testList == _tweet.GetTopics());
             Assert.IsTrue(testList2[0] == _tweet.GetLinks()[0]);
 
-            Assert.IsTrue(testTweet.GetLinks().Contains("http://yahoo.com"));
-            Assert.IsTrue(testTweet.GetLinks().Contains("http://google.com"));
+            Assert.IsTrue(testTweet.GetLinks().Contains("yahoo.com"));
+            Assert.IsTrue(testTweet.GetLinks().Contains("google.com"));
             Assert.IsFalse(testTweet.GetLinks().Contains("message"));
 
             Assert.IsTrue(testTweet.GetLinks().Count == 2);
